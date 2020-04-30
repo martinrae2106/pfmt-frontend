@@ -2,6 +2,13 @@
     <div>
         <h3 class="text-center">All Donators</h3><br/>
 
+        <h3 class="text-center">Add a new Donator: </h3>
+            <div class="btn-group" role="group">
+                        <router-link :to="{name: 'addDonator'}" class="btn btn-primary">Add Donator
+                        </router-link>
+        </div>
+
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -50,25 +57,37 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+    import axios from 'axios';
 
-export default {
-  name: 'Donators',
-  data() {
-      return {
-      }
-  },
-  created() {
-    this.$store.dispatch('retrieveDonators')
-  },
-  computed: {
-      donators() {
-          return this.$store.state.donators
-      }
-  }
-}
+   //const API_URL = 'http://pfmtlaravel.test/api/';
+
+    export default {
+        name: 'Donators',
+        data() {
+            return {
+                donators: [],
+                numberofDonators: 0,
+            }
+        },
+        created() {
+                axios
+                .get('http://pfmtlaravel.test/api/donators')
+                .then(response => {
+                    this.donators = response.data;
+                });
+        },
+        methods: {
+            deleteDonator(id) {
+                axios
+                    .delete(`http://pfmtlaravel.test/api/donators/${id}`)
+                    .then(response => {
+                        let i = this.donators.map(item => item.id).indexOf(id); // find index of your object
+                        this.donators.splice(i, 1)
+                    })
+                   .catch(error => {
+                       console.log(error)
+                    })
+            }
+        }
+    }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-</style>

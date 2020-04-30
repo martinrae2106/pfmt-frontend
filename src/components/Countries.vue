@@ -1,6 +1,12 @@
 <template>
     <div>
         <h3 class="text-center">All Countries</h3><br/>
+        <h3 class="text-center">Add a new Country: </h3>
+            <div class="btn-group" role="group">
+                        <router-link :to="{name: 'addCountry'}" class="btn btn-primary">Add Country
+                        </router-link>
+            </div><br/>
+
 
         <table class="table table-bordered">
             <thead>
@@ -32,25 +38,37 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+    import axios from 'axios';
 
-export default {
-  name: 'Countries',
-  data() {
-      return {
-      }
-  },
-  created() {
-    this.$store.dispatch('retrieveCountries')
-  },
-  computed: {
-      countries() {
-          return this.$store.state.countries
-      }
-  }
-}
+   //const API_URL = 'http://pfmtlaravel.test/api/';
+
+    export default {
+        name: 'Countries',
+        data() {
+            return {
+                countries: [],
+                numberofCountries: 0,
+            }
+        },
+        created() {
+                axios
+                .get('http://pfmtlaravel.test/api/countries')
+                .then(response => {
+                    this.countries = response.data;
+                });
+        },
+        methods: {
+            deleteCountry(id) {
+                axios
+                    .delete(`http://pfmtlaravel.test/api/countries/${id}`)
+                    .then(response => {
+                        let i = this.countries.map(item => item.id).indexOf(id); // find index of your object
+                        this.regions.splice(i, 1)
+                    })
+                   .catch(error => {
+                       console.log(error)
+                    })
+            }
+        }
+    }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-</style>
