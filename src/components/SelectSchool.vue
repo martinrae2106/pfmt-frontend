@@ -1,44 +1,22 @@
 <template>
 <div>
-<div class="hero-image">
-  <div class="hero-text">
-    <h1 class="banner">GIVE A SPECIAL GIFT</h1>
-    <h2 class="yellow">to your teacher this year</h2>
-    <button class="btn btn-primary btn-lg">BUY A PRESENT FOR MY TEACHER</button>
-  </div>
-</div>
-<div class="row home-spacer">
-  <div class="col-md-6">
-    <div class="col-md-12">
-    <h2 class="heading">It costs just 18.30 to feed a child for an entire school year</h2>
-    </div>
-    <div class="row col-md-12">
-    <h4 class="heading col-md-6">Thank your teacher</h4>
-    <h4 class="subheading col-md-6"> + feed a child</h4>
-    </div>
-  </div>
-  <div class="col-md-6 narrative">
-    <p>Mary's Meals provides life-changing meals to some of the world's poorest children in places of education
-      every day. Show your teacher how amazing they are by making a donation in their name and spread the gift of
-      hope to more classrooms around the world.
-    </p>
-  </div>
-</div>
 <div class="col-md-12 row home-spacer">
-  <div class="col-md-6 buy-gift-image">
+  <div class="col-md-6 box-image">
   </div>
   <div class="col-md-6 buy-gift-box">
     <div class="gift-text">
-      <h1 class="heading">I want to buy a gift for:</h1>
-            
+      <h1 class="heading">I go to school in:</h1>
+        <div class="row">
+            <div class="col-md-6">
                 <form @submit.prevent="addTeacher">
                     <div class="form-group">
-                        <label>Enter your teachers name</label>
-                        <input type="text" class="form-control" placeholder="e.g Mrs.Brown" v-model="teacherName">
+                        <label>What region is your school in?</label>
+                        <input type="text" class="form-control" placeholder="Mrs.Brown" v-model="teacherName">
                     </div>
                     <button type="submit" class="btn btn-warning btn-lg">Continue</button>
                 </form>
-            
+            </div>
+        </div>
   </div>
   </div>
 </div>
@@ -48,7 +26,7 @@
 <script>
 
 export default {
-  name: 'Home',
+  name: 'SelectSchool',
   data() {
       return {
         teacherName: ''
@@ -57,7 +35,7 @@ export default {
   methods: {
             addTeacher() {
                   this.$store.dispatch('addTeacher', this.teacherName)
-                  this.$router.push({name: 'selectSchool'})
+                  //this.$router.push({name: 'login'})
             }
   }
 }
@@ -93,9 +71,9 @@ body, html {
   margin:20px;
 }
 
-.buy-gift-image {
+.box-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/buyagiftfor.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/school.png');
   /* Set a specific height */
   height: 500px;
   width: 100%;
@@ -109,6 +87,7 @@ body, html {
 
 .buy-gift-box {
  height:500px;
+ width: 100%;
  background: #009DDC;
  border: solid thick white;
 }

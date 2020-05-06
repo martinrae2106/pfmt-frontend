@@ -7,120 +7,95 @@ axios.defaults.baseURL = 'http://pfmtlaravel.test/api'
 
 export const store = new Vuex.Store({
     state: {
-        schoool: '',
-        pupilName: 'Charlie',
+        token: localStorage.getItem('access_token') || null, //The same logiv for local storage to be implemented on name
+        schoool: '',                                         //and teacherName so that a page refresh does not wipe this
+        pupilName: 'Charlie',                                //as set in RetrieveToken
         teacherName: 'Mrs. Brown',
-        regions: [],
-        schools: [],
-        donators: [],
-        donations: [],
-        countries: [],
-        region: '',
+        //regions: [],
     }, 
     getters: {
-        getSchool(state) {
-            return state.school //now in the component you say return this.$store.getters.remaining
+        loggedIn(state){
+            return state.token !== null
         },
-        getPupilName(state){
-            return state.pupilName
-        },
-        getTeacherName(state){
-            return state.teacherName
-        },
+        token(state){
+            return state.token
+        }
     },
     mutations: {
-       retrieveRegions(state, regions) {
-           state.regions = regions
-       }, 
-       retrieveSchools(state, schools) {
-            state.schools = schools
-        },
-        retrieveDonators(state, donators) {
-            state.donators = donators
-        },
-        retrieveDonations(state, donations) {
-            state.donations = donations
-        },  
-        retrieveCountries(state, countries) {
-            state.countries = countries
-        },
-        retrieveRegion(state, region) {
-            state.region = region
-        },
-        updateRegion(state, region) {
-            const index = state.regions.findIndex(item => item.id == region.id)
-            state.regions.splice(index, 1, {
-              'id': region.id,
-              'name': region.name,
-            })
-        },
-
+     retrieveToken(state, token){
+         state.token = token
+     },
+     destroyToken(state){
+         state.token = null
+     },
+     addTeacher(state, teacherName){
+        state.teacherName = teacherName
+        console.log("the state's teacher name is " + state.teacherName)
+     },
     },
     actions: {
-        retrieveRegions(context) {
-            axios.get('/regions')
-            .then(response => {
-                context.commit('retrieveRegions', response.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        register(context, data) {
+            return new Promise((resolve, reject) => {
+                axios.post('/register', {
+                    name: data.name,
+                    email: data.email,
+                    password: data.password,
+                })
+                .then(response => {
+                    resolve(response)
+                  })
+                  .catch(error => {
+                   reject(error)
+                  })
+                })
         },
-        retrieveSchools(context) {
-            axios.get('/schools')
-            .then(response => {
-                context.commit('retrieveSchools', response.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        destroyToken(context){
+
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
+
+            if(context.getters.loggedIn){
+                return new Promise((resolve, reject) => {
+                    axios.post('/logout')
+                      .then(response => {
+                        localStorage.removeItem('access_token')
+                        context.commit('destroyToken')
+                        resolve(response)
+                        // console.log(response);
+                        // context.commit('addTodo', response.data)
+                      })
+                      .catch(error => {
+                        localStorage.removeItem('access_token')
+                        context.commit('destroyToken')
+                        reject(error)
+                      })
+                    })
+            }
         },
-        retrieveDonators(context) {
-            axios.get('/donators')
-            .then(response => {
-                context.commit('retrieveDonators', response.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        retrieveDonations(context) {
-            axios.get('/donations')
-            .then(response => {
-                context.commit('retrieveDonations', response.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        retrieveCountries(context) {
-            axios.get('/countries')
-            .then(response => {
-                context.commit('retrieveCountries', response.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        updateRegion(context, region) {
-            axios.patch('/regions/' + region.id, {
-              region: region.name,
-            })
-              .then(response => {
-                context.commit('updateRegion', response.data)
+        retrieveToken(context, credentials) {
+
+            return new Promise((resolve, reject) => {
+              axios.post('/login', {
+                username: credentials.username,
+                password: credentials.password,
               })
-              .catch(error => {
-                console.log(error)
+                .then(response => {
+                  const token = response.data.access_token
+      
+                  localStorage.setItem('access_token', token)
+                  context.commit('retrieveToken', token)
+                  resolve(response)
+                  // console.log(response);
+                  // context.commit('addTodo', response.data)
+                })
+                .catch(error => {
+                  console.log(error)
+                  reject(error)
+                })
               })
         },
-        retrieveRegion(context, id) {
-            axios.get('/region/' +id)
-            .then(response => {
-                context.commit('retrieveRegion', response.data)
-            })
-            .catch(errpr => {
-                console.log(error)
-            })
+        addTeacher(context, teacherName)
+        {
+              context.commit('addTeacher', teacherName)
         }
-    }
+    },    
 })

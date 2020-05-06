@@ -37,6 +37,8 @@ import axios from 'axios';
         },
         methods: {
             addDonation() {
+                    let token = this.$store.getters.token
+                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
                     axios
                     .post('http://pfmtlaravel.test/api/donation/', this.donation)
                     .then(response => (

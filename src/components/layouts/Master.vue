@@ -1,15 +1,25 @@
 <template>
-   <div id="app">
-      <ul class="nav">
-      <li><router-link :to="{ name: 'home' }">Home</router-link></li>
-      <li><router-link :to="{ name: 'regions' }">Regions</router-link></li>
-      <li><router-link :to="{ name: 'schools' }">Schools</router-link></li>
-      <li><router-link :to="{ name: 'donators' }">Donators</router-link></li>
-      <li><router-link :to="{ name: 'donations' }">Donations</router-link></li>
-      <li><router-link :to="{ name: 'countries' }">Countries</router-link></li>
-      <!--li v-if="!loggedIn"><router-link :to="{ name: 'login' }">Login</router-link></li-->
-      </ul>
-
+   <div id="app" class="container-fluid">
+     <div class="row">
+      <div class="nav col-md-12">
+          <div class="col-md-6 logo row">  
+            <img src="../../assets/mmlogo.png" class="logo">
+            <h4 class="logo-element">Present For My Teacher</h4>
+          </div>
+          <div class="col-md-6 row nav-element">
+            <li  v-if="loggedIn"><router-link :to="{ name: 'home' }">Home</router-link></li>
+            <li  v-if="loggedIn"><router-link :to="{ name: 'regions' }">Regions</router-link></li>
+            <li  v-if="loggedIn"><router-link :to="{ name: 'schools' }">Schools</router-link></li>
+            <li  v-if="loggedIn"><router-link :to="{ name: 'donators' }">Donators</router-link></li>
+            <li  v-if="loggedIn"><router-link :to="{ name: 'donations' }">Donations</router-link></li>
+            <li  v-if="loggedIn"><router-link :to="{ name: 'countries' }">Countries</router-link></li>
+            <!--li v-if="!loggedIn"><router-link :to="{ name: 'login' }">Login</router-link></li>
+            <li v-if="!loggedIn"><router-link :to="{ name: 'register' }">Register</router-link></li-->
+            <li v-if="loggedIn"><router-link :to="{ name: 'logout' }">Logout</router-link></li>
+            <!--li v-if="!loggedIn"><router-link :to="{ name: 'login' }">Login</router-link></li-->
+          </div>
+      </div>
+    </div>
         <router-view></router-view>
    </div>
 </template>
@@ -18,7 +28,11 @@
 import axios from 'axios'
 
 export default {
-    
+    computed: {
+      loggedIn() {
+        return this.$store.getters.loggedIn
+      }
+    }
 }
 </script>
 
@@ -31,11 +45,8 @@ export default {
     padding: 0;
   }
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    font-size: 24px;
     height: 100vh;
   }
   .flex-center {
@@ -44,22 +55,41 @@ export default {
   }
   .nav {
     display: flex;
+    width:100%;
     list-style: none;
     padding: 15px 0;
     margin: 0;
     justify-content: flex-end;
-    background: #F5F8FA;
-    border-bottom: 1px solid lightgrey;
-    margin-bottom: 24px;
+    background: #009DDC;
+    margin-bottom: 0px;
+    z-index: 99;
+    border-bottom: thin solid #009DDC;
+    -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+  }
+  .nav-element {
+    align-content: center;
   }
   .nav a {
-    color: #636b6f;
+    color: white;
     padding: 0 25px;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
+  }
+
+  .logo {
+    align-content: center;
+    height: 35px;
+  }
+  .logo-element {
+    align-content: center;
+    color: #F3a909;
+    font-family: 'Gloria Hallelujah', sans-serif;
+    padding-left: 15px;
   }
   // Auth Pages
   label {

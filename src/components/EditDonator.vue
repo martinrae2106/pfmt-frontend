@@ -61,6 +61,8 @@
             }
         },
         created() {
+                let token = this.$store.getters.token
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
                 axios
                 .get(`http://pfmtlaravel.test/api/donator/${this.$route.params.id}`)
                 .then((response) => {

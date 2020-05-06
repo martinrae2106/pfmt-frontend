@@ -15,6 +15,7 @@ import AllCountrys from './components/AllCountrys.vue';
 import EditCountry from './components/EditCountry.vue';
 import LoginPage from './components/LoginPage.vue';*/
 import Home from './components/Home.vue';
+import SelectSchool from './components/SelectSchool.vue';
 import Regions from './components/Regions.vue';
 import Schools from './components/Schools.vue';
 import Donators from './components/Donators.vue';
@@ -30,95 +31,166 @@ import AddRegion from './components/AddRegion.vue';
 import AddDonator from './components/AddDonator.vue';
 import AddDonation from './components/AddDonation.vue';
 import AddCountry from './components/AddCountry.vue';
+import Login from './components/auth/Login.vue';
+import Logout from './components/auth/Logout.vue';
+import Register from './components/auth/Register.vue';
 
 const routes = [
   {
         name:'home',
         path: '/',
         component: Home
-
+  },
+  {
+    name:'selectSchool',
+    path: '/selectSchool',
+    component: SelectSchool
   },
   {
       name: 'regions',
-      path: '/regions',
-      component: Regions
+      path: '/admin/regions',
+      component: Regions,
+      meta: {
+        requiresAuth: true,
+      }
   },
   { 
       name: 'editRegion',
-      path: '/region/edit/:id',
-      component: EditRegion
+      path: '/admin/region/edit/:id',
+      component: EditRegion,
+      meta: {
+        requiresAuth: true,
+      }
   },
   { 
     name: 'editSchool',
-    path: '/school/edit/:id',
-    component: EditSchool
+    path: '/admin/school/edit/:id',
+    component: EditSchool,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'editDonator',
-    path: '/donator/edit/:id',
-    component: EditDonator
+    path: '/admin/donator/edit/:id',
+    component: EditDonator,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'editDonation',
-    path: '/donation/edit/:id',
-    component: EditDonation
+    path: '/admin/donation/edit/:id',
+    component: EditDonation,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'editCountry',
-    path: '/country/edit/:id',
-    component: EditCountry
+    path: '/admin/country/edit/:id',
+    component: EditCountry,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'addSchool',
-    path: '/school/add',
-    component: AddSchool
+    path: '/admin/school/add',
+    component: AddSchool,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'addRegion',
-    path: '/region/add',
-    component: AddRegion
+    path: '/admin/region/add',
+    component: AddRegion,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'addDonator',
-    path: '/donator/add',
-    component: AddDonator
+    path: '/admin/donator/add',
+    component: AddDonator,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'addDonation',
-    path: '/donation/add',
-    component: AddDonation
+    path: '/admin/donation/add',
+    component: AddDonation,
+    meta: {
+      requiresAuth: true,
+    }
   },
   { 
     name: 'addCountry',
-    path: '/country/add',
-    component: AddCountry
+    path: '/admin/country/add',
+    component: AddCountry,
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
       name: 'schools',
-      path: '/schools',
-      component: Schools
+      path: '/admin/schools',
+      component: Schools,
+      meta: {
+        requiresAuth: true,
+      }
   },
   {
     name: 'donators',
-    path: '/donators',
-    component: Donators
+    path: '/admin/donators',
+    component: Donators,
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     name: 'donations',
-    path: '/donations',
-    component: Donations
+    path: '/admin/donations',
+    component: Donations,
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     name: 'countries',
-    path: '/countries',
-    component: Countries
+    path: '/admin/countries',
+    component: Countries,
+    meta: {
+      requiresAuth: true,
+    }
   },
-    /*  {
-        name:'login',
-        path:'/login',
-        component: LoginPage
-    },
-    {
+  {
+    name:'login',
+    path:'/admin/login',
+    component: Login,
+    meta: {
+      requiresVisitor: true
+    }
+  },
+  {
+    name:'register',
+    path:'/admin/register',
+    component: Register,
+    meta: {
+      requiresVisitor: true
+    }
+},
+  {
+    name:'logout',
+    path:'/admin/logout',
+    component: Logout,
+    meta: {
+      requiresAuth: true,
+    }
+},
+  /*  {
         name: 'home',
         path: '/',
         component: AllSchools

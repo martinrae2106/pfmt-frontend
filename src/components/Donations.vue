@@ -29,6 +29,7 @@
                 <td>{{ donation.transactionStatus }}</td>
                 <td>{{ donation.created_at }}</td>
                 <td>{{ donation.updated_at }}</td>
+                <td>{{ token }}</td>
                 <td>
                     <div class="btn-group" role="group">
                         <router-link :to="{name: 'editDonation', params: { id: donation.id }}" class="btn btn-primary">Edit
@@ -44,8 +45,11 @@
 
 <script>
     import axios from 'axios';
+    //import {mapGetters} from "vuex";
 
    //const API_URL = 'http://pfmtlaravel.test/api/';
+
+   //token = token()
 
     export default {
         name: 'Donations',
@@ -55,7 +59,16 @@
                 numberofDonations: 0,
             }
         },
+        computed: {
+            token(){
+                console.log("Im in token")
+                let token = this.$store.getters.token
+                console.log(token)
+            }
+        },
         created() {
+                let token = this.$store.getters.token
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
                 axios
                 .get('http://pfmtlaravel.test/api/donations')
                 .then(response => {

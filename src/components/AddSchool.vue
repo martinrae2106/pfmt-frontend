@@ -32,6 +32,8 @@ import axios from 'axios';
         },
         methods: {
             addSchool() {
+                    let token = this.$store.getters.token
+                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
                     axios
                     .post('http://pfmtlaravel.test/api/school/', this.school)
                     .then(response => (
