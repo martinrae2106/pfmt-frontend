@@ -11,6 +11,8 @@ export const store = new Vuex.Store({
         schoool: '',                                         //and teacherName so that a page refresh does not wipe this
         pupilName: 'Charlie',                                //as set in RetrieveToken
         teacherName: 'Mrs. Brown',
+        region: '',
+        donationAmount: '18.30',
         //regions: [],
     }, 
     getters: {
@@ -19,6 +21,12 @@ export const store = new Vuex.Store({
         },
         token(state){
             return state.token
+        },
+        region(state){
+            return  state.region
+        },
+        donationAmount(state){
+           return state.donationAmount
         }
     },
     mutations: {
@@ -32,6 +40,18 @@ export const store = new Vuex.Store({
         state.teacherName = teacherName
         console.log("the state's teacher name is " + state.teacherName)
      },
+     addRegion(state, region){
+      state.region = region
+      console.log("the state's region id is " + state.region)
+     },
+     addSchool(state, school){
+      state.school = school
+      console.log("the state's school id is " + state.school)
+     },
+     updateDonation(state, donationAmount){
+       state.donationAmount = donationAmount
+       console.log("the state's donation amount is " + state.donationAmount)
+     }
     },
     actions: {
         register(context, data) {
@@ -96,6 +116,18 @@ export const store = new Vuex.Store({
         addTeacher(context, teacherName)
         {
               context.commit('addTeacher', teacherName)
-        }
+        },
+        addRegion(context, region)
+        {
+              context.commit('addRegion', region)
+        },
+        addSchool(context, school)
+        {
+              context.commit('addSchool', school)
+        },
+        updateDonation(context, donationAmount)
+        {
+              context.commit('updateDonation', donationAmount)
+        },
     },    
 })

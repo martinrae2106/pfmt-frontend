@@ -5,18 +5,20 @@
   </div>
   <div class="col-md-6 buy-gift-box">
     <div class="gift-text">
-      <h1 class="heading">I go to school in:</h1>
+      <h1 class="heading">What School do you attend?</h1>
         <div class="row">
-            <div class="col-md-6">
-                <form @submit.prevent="addTeacher">
+            <div class="col-md-12">
+                <form @submit.prevent="addSchool">
                     <div class="form-group">
-                        <label>What region is your school in?</label>
-                        <input type="text" class="form-control" placeholder="Mrs.Brown" v-model="teacherName">
+                        <label class="dropdown">Please select your school</label>
+                        <b-form-select class="dropdown" v-model="selected" :options="schools" value-field="id" text-field="name" placeholder="School"></b-form-select>
                     </div>
                     <button type="submit" class="btn btn-warning btn-lg">Continue</button>
                 </form>
             </div>
         </div>
+         <!-- string value -->
+
   </div>
   </div>
 </div>
@@ -24,20 +26,32 @@
 </template>
 
 <script>
+import { ModelSelect } from 'vue-search-select'
+import axios from 'axios';
 
 export default {
-  name: 'SelectSchool',
+  name: 'SelectRegion',
   data() {
       return {
-        teacherName: ''
+        schools: [],
+        selected: null,
       }
   }, 
+  created() {
+                let id = this.$store.getters.region
+                axios
+                .get('http://pfmtlaravel.test/api/schools/' +id)
+                .then(response => {
+                    this.schools = response.data;
+                });
+  },
   methods: {
-            addTeacher() {
-                  this.$store.dispatch('addTeacher', this.teacherName)
-                  //this.$router.push({name: 'login'})
-            }
-  }
+            addSchool() {
+                  this.$store.dispatch('addSchool', this.selected)
+                  console.log(this.selected)
+                   this.$router.push({name: 'selectdonation'})
+            },
+    },
 }
 </script>
 
@@ -94,6 +108,10 @@ body, html {
 
 .btn {
   font-family: 'Staatliches', sans-serif;
+}
+
+.dropdown {
+  margin-left: 70px;
 }
 
 

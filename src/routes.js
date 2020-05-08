@@ -15,7 +15,9 @@ import AllCountrys from './components/AllCountrys.vue';
 import EditCountry from './components/EditCountry.vue';
 import LoginPage from './components/LoginPage.vue';*/
 import Home from './components/Home.vue';
+import SelectRegion from './components/SelectRegion.vue';
 import SelectSchool from './components/SelectSchool.vue';
+import SelectDonation from './components/SelectDonation.vue';
 import Regions from './components/Regions.vue';
 import Schools from './components/Schools.vue';
 import Donators from './components/Donators.vue';
@@ -35,6 +37,7 @@ import Login from './components/auth/Login.vue';
 import Logout from './components/auth/Logout.vue';
 import Register from './components/auth/Register.vue';
 
+
 const routes = [
   {
         name:'home',
@@ -42,9 +45,19 @@ const routes = [
         component: Home
   },
   {
-    name:'selectSchool',
-    path: '/selectSchool',
+    name:'selectregion',
+    path: '/selectregion',
+    component: SelectRegion
+  },
+  {
+    name:'selectschool',
+    path: '/selectschool',
     component: SelectSchool
+  },
+  {
+    name:'selectdonation',
+    path: '/selectdonation',
+    component: SelectDonation
   },
   {
       name: 'regions',

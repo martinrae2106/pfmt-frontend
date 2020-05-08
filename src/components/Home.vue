@@ -57,7 +57,7 @@ export default {
   methods: {
             addTeacher() {
                   this.$store.dispatch('addTeacher', this.teacherName)
-                  this.$router.push({name: 'selectSchool'})
+                  this.$router.push({name: 'selectregion'})
             }
   }
 }
