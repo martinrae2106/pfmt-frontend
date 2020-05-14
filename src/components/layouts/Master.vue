@@ -4,7 +4,7 @@
       <div class="nav col-md-12">
           <div class="col-md-6 logo row">  
             <img src="../../assets/mmlogo.png" class="logo">
-            <h4 class="logo-element">Present For My Teacher</h4>
+            <h5 class="logo-element">Present For My Teacher</h5>
           </div>
           <div class="col-md-6 row nav-element">
             <li  v-if="loggedIn"><router-link :to="{ name: 'home' }">Home</router-link></li>
@@ -21,7 +21,10 @@
       </div>
     </div>
         <router-view></router-view>
+        <br>
+        <pagefooter></pagefooter>
    </div>
+        
 </template>
 
 <script>
@@ -44,6 +47,15 @@ export default {
     margin: 0;
     padding: 0;
   }
+
+
+  body, html {
+    height: 100%;
+    min-width: 300px;
+    max-width: 2200px;
+}
+
+
   #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -83,12 +95,15 @@ export default {
 
   .logo {
     align-content: center;
-    height: 35px;
+    height: 30px;
+    margin-top:5px;
+    margin-bottom:5px;
   }
   .logo-element {
     align-content: center;
     color: #F3a909;
     font-family: 'Gloria Hallelujah', sans-serif;
+    padding-top:9px;
     padding-left: 15px;
   }
   // Auth Pages
@@ -201,4 +216,17 @@ export default {
       transform: rotate(360deg);
     }
   }
+  /* Small devices (landscape phones, 544px and up) */
+  @media (min-width: 10px) {  
+    .logo-element {font-size:1.0rem;} /*1rem = 16px*/
+  }
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+    .logo-element {font-size:1.4rem;}   
+}
+
+
+
+
 </style>

@@ -1,18 +1,17 @@
 <template>
+<div>
 <div class="col-md-12 row home-spacer">
-  <div class="col-md-6 box-image-region">
+  <div class="col-md-6 box-image">
   </div>
-  <div class="col-md-6 buy-gift-box-region">
-    <div class="gift-text-region">
-      <h2 class="heading-region">I go to school in:</h2>
+  <div class="col-md-6 buy-gift-box">
+    <div class="gift-text">
+      <h1 class="heading">I go to school in:</h1>
         <div class="row">
             <div class="col-md-12">
                 <form @submit.prevent="addRegion">
                     <div class="form-group">
                         <label class="dropdown">What region is your school in?</label>
-                        <b-form-select required class="dropdown" v-model="selected" :options="regions" value-field="id" text-field="name" 
-                        oninvalid="this.setCustomValidity('Select your region')"
-                        oninput="setCustomValidity('')" placeholder="region"></b-form-select>
+                        <b-form-select class="dropdown" v-model="selected" :options="regions" value-field="id" text-field="name" placeholder="region"></b-form-select>
                     </div>
                     <button type="submit" class="btn btn-warning btn-lg">Continue</button>
                 </form>
@@ -22,6 +21,7 @@
 
   </div>
   </div>
+</div>
 </div>
 </template>
 
@@ -86,73 +86,115 @@ body, html {
   margin:20px;
 }
 
-.box-image-region {
+.box-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/school.png');
   /* Set a specific height */
+  height: 500px;
   width: 100%;
   /* Position and center the image to scale nicely on all screens */
-  background-position: left;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  border: solid thin white;
+  border: solid thick white;
 }
 
-.buy-gift-box-region {
+.buy-gift-box {
  height:500px;
  width: 100%;
  background: #009DDC;
- border: solid thin white;
+ border: solid thick white;
 }
 
 .btn {
   font-family: 'Staatliches', sans-serif;
 }
 
-.gift-text-region {
-  margin-top:6vh;
-  margin-left: 2vh;
-  margin-right: 2vh;
+.dropdown {
+  margin-left: 70px;
+}
+
+
+.narrative {
+  font-size: 20px;
+  align-content: center;
+  padding-right: 40px;
+}
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: white;
 }
 
-.heading-region {
+.gift-text {
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.banner {
+    font-family: 'Staatliches', sans-serif;
+    margin-bottom: 0px;
+    text-align: center;
+
+}
+
+.heading {
     font-family: 'Staatliches', sans-serif;
     margin-bottom: 10px;
+    padding-left: 60px;
     text-align: left;
+
+}
+
+.subheading {
+    color: #F3a909;
+    font-family: 'Gloria Hallelujah', sans-serif;
+    text-align: left;
+}
+
+
+.yellow {
+    color: #F3a909;
+    font-family: 'Gloria Hallelujah', sans-serif;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+     font-family: 'Staatliches', sans-serif;
 }
 
 /* Small devices (landscape phones, 544px and up) */
 @media (min-width: 244px) {  
   .banner {font-size:2.5rem;} /*1rem = 16px*/
   .yellow {font-size:1.2rem;} /*1rem = 16px*/
-  .box-image-region {height:45vh;}
-  .buy-gift-box-region  {height:45vh;} 
 }
  
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
   .banner {font-size:3rem;} /*1rem = 16px*/
   .yellow {font-size:1.5rem;}   
-  .box-image-region {height:45vh;}
-  .buy-gift-box-region  {height:45vh;} 
 }
  
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
   .banner {font-size:4rem;} /*1rem = 16px*/
   .yellow {font-size:2rem;}
-  .box-image-region {height:45hvh;}
-  .buy-gift-box-region  {height:45vh;} 
 }
  
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {  
   .banner {font-size:5rem;} /*1rem = 16px*/ 
-  .yellow {font-size:2.5rem;}
-  .box-image-region {height:50vh;}
-  .buy-gift-box-region  {height:50vh;}    
+  .yellow {font-size:2.5rem;}   
 }
 
 </style>

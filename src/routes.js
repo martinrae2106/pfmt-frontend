@@ -18,6 +18,10 @@ import Home from './components/Home.vue';
 import SelectRegion from './components/SelectRegion.vue';
 import SelectSchool from './components/SelectSchool.vue';
 import SelectDonation from './components/SelectDonation.vue';
+//import PaymentForm from './components/PaymentForm.vue';
+import MakeDonation from './components/MakeDonation.vue';
+import WriteMessage from './components/WriteMessage.vue';
+import ThankYou from './components/ThankYou.vue';
 import Regions from './components/Regions.vue';
 import Schools from './components/Schools.vue';
 import Donators from './components/Donators.vue';
@@ -58,6 +62,21 @@ const routes = [
     name:'selectdonation',
     path: '/selectdonation',
     component: SelectDonation
+  },
+  {
+    name:'makedonation',
+    path: '/makedonation',
+    component: MakeDonation
+  },
+  {
+    name:'writemessage',
+    path: '/writemessage',
+    component: WriteMessage
+  },
+  {
+    name:'thankyou',
+    path: '/thankyou',
+    component: ThankYou
   },
   {
       name: 'regions',

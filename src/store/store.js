@@ -9,9 +9,10 @@ export const store = new Vuex.Store({
     state: {
         token: localStorage.getItem('access_token') || null, //The same logiv for local storage to be implemented on name
         schoool: '',                                         //and teacherName so that a page refresh does not wipe this
-        pupilName: 'Charlie',                                //as set in RetrieveToken
+        pupilName: '',                                //as set in RetrieveToken
         teacherName: 'Mrs. Brown',
         region: '',
+        message: '',
         donationAmount: '18.30',
         //regions: [],
     }, 
@@ -51,6 +52,14 @@ export const store = new Vuex.Store({
      updateDonation(state, donationAmount){
        state.donationAmount = donationAmount
        console.log("the state's donation amount is " + state.donationAmount)
+     },
+     addMessage(state, message){
+      state.message = message
+      console.log("the state's message is " + state.message)
+     },
+     addPupilName(state, pupilName){
+       state.pupilName = pupilName
+       console.log("the pupil's name is " +state.pupilName)
      }
     },
     actions: {
@@ -129,5 +138,14 @@ export const store = new Vuex.Store({
         {
               context.commit('updateDonation', donationAmount)
         },
+        addMessage(context, message)
+        {
+              context.commit('addMessage', message)
+        },
+        addPupilName(context, pupilName)
+        {
+              context.commit('addPupilName', pupilName)
+        },
+        
     },    
 })

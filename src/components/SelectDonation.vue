@@ -60,7 +60,7 @@
                             </h5>
             </div>
 
-                            <form @submit.prevent="updateDonation(donationAmount)">
+                            <form @submit.prevent="updateDonationSubmit(donationAmount)">
                                <div class="form-group">
                                      <div class="row col-md-12">
                                        <div class="col-md-7">
@@ -148,10 +148,18 @@ export default {
   methods: {
             updateDonation(amount) {
                   this.$store.dispatch('updateDonation', amount)
-                  //this.$router.push({name: 'login'})
+                  
                   this.donationAmount = this.$store.getters.donationAmount
+                  //this.$router.push({name: 'makedonation'})
+            },
+            updateDonationSubmit(amount) {
+                  this.$store.dispatch('updateDonation', amount)
+                  
+                  this.donationAmount = this.$store.getters.donationAmount
+                  this.$router.push({name: 'makedonation'})
             },
     },
+
 }
 </script>
 
