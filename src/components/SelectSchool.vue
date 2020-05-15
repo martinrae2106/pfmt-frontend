@@ -1,10 +1,12 @@
 <template>
-<div class="col-md-12 row home-spacer">
-  <div class="col-md-6 box-image-region">
+<div class="col-md-12">
+<div class="row spacer">
+
+  <div class="col-md-6 box-image-school">
   </div>
-  <div class="col-md-6 buy-gift-box-region">
-    <div class="gift-text-region">
-      <h2 class="heading-region">What School do you attend?</h2>
+  <div class="col-md-6 buy-gift-box-school">
+    <div class="gift-text-school">
+      <h2 class="heading-school">What School do you attend?</h2>
         <div class="row">
             <div class="col-md-12">
                 <form @submit.prevent="addSchool">
@@ -22,6 +24,7 @@
 
   </div>
   </div>
+</div>
 </div>
 </template>
 
@@ -64,15 +67,16 @@ body, html {
     height: 100%;
 }
 
-.home-spacer {
-  margin:20px;
+.spacer {
+  margin-top:10px;
 }
 
-.box-image-region {
+.box-image-school {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/school.png');
   /* Set a specific height */
   width: 100%;
+  min-height: 300px;
   /* Position and center the image to scale nicely on all screens */
   background-position: left;
   background-repeat: no-repeat;
@@ -81,8 +85,8 @@ body, html {
   border: solid thin white;
 }
 
-.buy-gift-box-region {
- height:500px;
+.buy-gift-box-school {
+ min-height: 400px;
  width: 100%;
  background: #009DDC;
  border: solid thin white;
@@ -92,14 +96,14 @@ body, html {
   font-family: 'Staatliches', sans-serif;
 }
 
-.gift-text-region {
+.gift-text-school {
   margin-top:6vh;
   margin-left: 2vh;
   margin-right: 2vh;
   color: white;
 }
 
-.heading-region {
+.heading-school {
     font-family: 'Staatliches', sans-serif;
     margin-bottom: 10px;
     text-align: left;
@@ -107,33 +111,25 @@ body, html {
 
 /* Small devices (landscape phones, 544px and up) */
 @media (min-width: 244px) {  
-  .banner {font-size:2.5rem;} /*1rem = 16px*/
-  .yellow {font-size:1.2rem;} /*1rem = 16px*/
-  .box-image-region {height:45vh;}
-  .buy-gift-box-region  {height:45vh;} 
+  .box-image-school {height:auto;}
+  .buy-gift-box-school  {height:100%;} 
 }
  
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
-  .banner {font-size:3rem;} /*1rem = 16px*/
-  .yellow {font-size:1.5rem;}   
-  .box-image-region {height:45vh;}
-  .buy-gift-box-region  {height:45vh;} 
+  .box-image-school {height:auto;}
+  .buy-gift-box-school  {height:100%;} 
 }
  
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
-  .banner {font-size:4rem;} /*1rem = 16px*/
-  .yellow {font-size:2rem;}
-  .box-image-region {height:45hvh;}
-  .buy-gift-box-region  {height:45vh;} 
+  .box-image-school {height:auto;}
+  .buy-gift-box-school  {height:100%;} 
 }
  
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {  
-  .banner {font-size:5rem;} /*1rem = 16px*/ 
-  .yellow {font-size:2.5rem;}
-  .box-image-region {height:50vh;}
-  .buy-gift-box-region  {height:50vh;}    
+  .box-image-school {height:auto;}
+  .buy-gift-box-school  {height:100%;}    
 }
 </style>

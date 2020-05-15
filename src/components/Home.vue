@@ -1,6 +1,5 @@
 <template>
-<div class="container-fluid">
-   <div>
+<div>
    <div class="row">
       <div class="hero-image">
         <div class="hero-text">
@@ -31,7 +30,7 @@
     </div>
   </div>
   <hr>
-</div>
+
 
 
 <div class="row">
@@ -164,6 +163,7 @@ body, html {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/buyagiftfor.png');
   /* Set a specific height */
   width: 100%;
+  min-height: 300px;
   /* Position and center the image to scale nicely on all screens */
   background-position: left;
   background-repeat: no-repeat;
@@ -175,6 +175,8 @@ body, html {
 .buy-gift-box {
  background: #009DDC;
  border: solid thin white;
+ min-height: 400px;
+ width: 100%;
 }
 
 .btn {
@@ -197,8 +199,8 @@ body, html {
   .banner {font-size:2.0rem;} /*1rem = 16px*/
   .yellow {font-size:1.0rem;} /*1rem = 16px*/
   .hero-image {height:40vh;}
-  .buy-gift-image {height:40vh;}
-  .buy-gift-box {height:40vh;} 
+  .buy-gift-image {height:auto;}
+  .buy-gift-box {height:100%;} 
 }
  
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
@@ -206,8 +208,8 @@ body, html {
   .banner {font-size:3rem;} /*1rem = 16px*/
   .yellow {font-size:1.5rem;}   
   .hero-image {height:48vh;}
-  .buy-gift-image {height:40vh;}
-  .buy-gift-box {height:40vh;} 
+  .buy-gift-image {height:auto;}
+  .buy-gift-box {height:100%;} 
 }
  
 /* Large devices (desktops, 992px and up) */
@@ -215,8 +217,8 @@ body, html {
   .banner {font-size:4rem;} /*1rem = 16px*/
   .yellow {font-size:2rem;}
   .hero-image {height:55vh;}
-  .buy-gift-image {height:45vh;}
-  .buy-gift-box {height:45vh;} 
+  .buy-gift-image {height:auto;}
+  .buy-gift-box {height:100%;} 
 }
  
 /* Extra large devices (large desktops, 1200px and up) */
@@ -224,8 +226,8 @@ body, html {
   .banner {font-size:4rem;} /*1rem = 16px*/ 
   .yellow {font-size:2rem;}   
   .hero-image {height:60vh;}
-  .buy-gift-image {height:50vh;}
-  .buy-gift-box {height:50vh;} 
+  .buy-gift-image {height:auto;}
+  .buy-gift-box {height:100%;} 
 }
 
 </style>

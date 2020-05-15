@@ -1,9 +1,10 @@
 <template>
-<div>
-    <div class="col-md-12 row home-spacer">
-        <div class="col-md-6 box-image">
+<div class="col-md-12">
+    <div class="row spacer">
+        <div class="col-md-6 box-image-makedonation">
         </div>
-        <div class="col-md-6 buy-gift-box">
+        <div class="col-md-6 buy-gift-box-makedonation">
+            <h2 class="heading-make-donation">Enter your donation details:</h2>
             <payment-form></payment-form>
         </div>
     </div>
@@ -26,7 +27,7 @@ body, html {
     height: 100%;
 }
 
-.home-spacer {
+spacer {
   margin:20px;
 }
 
@@ -34,30 +35,38 @@ body, html {
   padding: 20px;
   background-color: #009DDC;
   border: solid thin white;
-
 }
 
-.box-image {
+.box-image-makedonation {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/donation.png');
   /* Set a specific height */
-  height: 500px;
+  min-height: 300px;
+  height: auto;
   width: 100%;
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  border: solid thick white;
+   border: solid thin white;
 }
 
-.buy-gift-box {
- height:500px;
+.buy-gift-box-makedonation {
+ height: 100%;
  width: 100%;
- background: #009DDC;
- border: solid thick white;
+ background:#F3a909;
+ border: solid thin white;
  padding: 50px;
 }
+
+.heading-make-donation {
+    font-family: 'Staatliches', sans-serif;
+    margin-bottom: 10px;
+    text-align: left;
+    color:white;
+}
+
 
 .btn {
   font-family: 'Staatliches', sans-serif;

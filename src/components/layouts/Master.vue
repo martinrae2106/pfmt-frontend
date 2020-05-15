@@ -1,7 +1,7 @@
 <template>
-   <div id="app" class="container-fluid">
+   <div id="app" class="container-fluid col-md-12">
      <div class="row">
-      <div class="nav col-md-12">
+      <div class="nav">
           <div class="col-md-6 logo row">  
             <img src="../../assets/mmlogo.png" class="logo">
             <h5 class="logo-element">Present For My Teacher</h5>
@@ -51,8 +51,7 @@ export default {
 
   body, html {
     height: 100%;
-    min-width: 300px;
-    max-width: 2200px;
+    min-width: 320px;
 }
 
 

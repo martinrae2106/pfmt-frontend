@@ -1,20 +1,23 @@
 <template>
-<div>
-<div class="col-md-12 row home-spacer">
-  <div class="col-md-6 box-image">
+<div class="col-md-12">
+<div class="row spacer">
+
+  <div class="col-md-6 box-image-donation">
   </div>
-  <div class="col-md-6 buy-gift-box">
-    <div class="gift-text">
-      <h1 class="heading">I want to donate:</h1>
-        <div class="row">
-            <div class="col-md-12">
+
+  <div class="col-md-6 buy-gift-box-donation">
+    <div class="gift-text-donation">
+      <h2 class="heading-donation"> I want to donate:</h2>
+        <div>
                             <b-button-group class="mx-1">
-                                   <b-button v-on:click="updateDonation(5.00)" class="donate-button" id="1">€5</b-button>
-                                   <b-button v-on:click="updateDonation(10.00)" class="donate-button" id="2">€10</b-button>
-                                   <b-button v-on:click="updateDonation(18.30)" class="donate-button" id="3" autofocus="true">€18.30</b-button>
+                                   <b-button v-on:click="updateDonation('5.00')" class="donate-button" id="1">€5</b-button>
+                                   <b-button v-on:click="updateDonation('10.00')" class="donate-button" id="2">€10</b-button>
+                                   <b-button v-on:click="updateDonation('18.30')" class="donate-button" id="3" autofocus="true">€18.30</b-button>
                             </b-button-group>
 
-                            <h5 class="heading">Your kind donation of €{{ donationAmount }} will feed a child for: 
+                            <div class="spacer"></div>
+
+                            <h7 class="heading-donation">Your kind donation of €{{ donationAmount }} will feed a child for: 
                               <span v-if="years > 0">
                                 <span v-if="years > 1">    
                                      {{ years }} school years
@@ -57,18 +60,27 @@
                                 </span>  
                               </span> 
 
-                            </h5>
-            </div>
+                            </h7>
+                            <div class="spacer"></div>
+        </div>
 
                             <form @submit.prevent="updateDonationSubmit(donationAmount)">
                                <div class="form-group">
-                                     <div class="row col-md-12">
-                                       <div class="col-md-7">
-                                        <p>I would like to donate €:</p> 
+                                     <div class="row">
+                                       <div class="col-sm-12 col-md-4" style="max-width: 200px; min-width:200px;">
+                                        <p>I want to donate:</p> 
                                        </div>
-                                       <div class="col-md-3">
-                                        <input type="text" class="form-control" v-model="donationAmount">
-                                       </div>
+
+                                       <div class="input-group mb-2 col-sm-12 col-md-4" style="max-width: 200px; min-width:150px;">
+                                          <div class="input-group-prepend">
+                                          <span class="input-group-text" style="background-color:#F3a909">€</span>
+                                          </div>
+                                          <input type="number" class="form-control" aria-label="Amount in Euros" v-model="donationAmount">
+                                        </div> 
+
+
+
+
                                      </div>
                                </div>
                                       <button type="submit" class="btn btn-warning btn-lg">Continue</button>
@@ -78,7 +90,6 @@
 
   </div>
   </div>
-</div>
 </div>
 </template>
 
@@ -169,61 +180,62 @@ export default {
 
 body, html {
     height: 100%;
+    width: 100%;
 }
 
-.home-spacer {
-  margin:20px;
+.spacer {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .donate-button {
   padding: 20px;
   background-color: #009DDC;
   border: solid thin white;
-
 }
 
-.box-image {
+.donate-button:focus {
+  background-color: #F3a909;
+  border: solid thin white;
+}
+
+
+.box-image-donation {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/donation.png');
   /* Set a specific height */
-  height: 500px;
+  min-height: 300px;
+  height: auto;
   width: 100%;
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  border: solid thick white;
+  border: solid thin white;
 }
 
-.buy-gift-box {
- height:500px;
+.buy-gift-box-donation {
+ height:100%;
  width: 100%;
  background: #009DDC;
- border: solid thick white;
- padding: 50px;
+ border: solid thin white;
+ padding: 70px;
 }
 
 .btn {
   font-family: 'Staatliches', sans-serif;
 }
 
-
-.gift-text {
+.gift-text-donation {
   color: white;
 }
 
-
-
-.heading {
+.heading-donation {
     font-family: 'Staatliches', sans-serif;
-    margin-top: 20px;
-}
-
-.subheading {
-    color: #F3a909;
-    font-family: 'Gloria Hallelujah', sans-serif;
+    margin-bottom: 10px;
     text-align: left;
+    color:white;
 }
 
 .btn-primary {

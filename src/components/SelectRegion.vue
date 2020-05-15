@@ -1,5 +1,6 @@
 <template>
-<div class="col-md-12 row home-spacer">
+<div class="col-md-12">
+<div class="row spacer">
   <div class="col-md-6 box-image-region">
   </div>
   <div class="col-md-6 buy-gift-box-region">
@@ -22,6 +23,7 @@
 
   </div>
   </div>
+</div>
 </div>
 </template>
 
@@ -70,8 +72,8 @@ body, html {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../assets/Hero.png');
   /* Set a specific height */
   margin-top: 1px;
-  height: 550px;
   width: 100%;
+  min-height: 300px;
   margin-bottom: 20px;
 
 
@@ -82,8 +84,8 @@ body, html {
   position: relative;
 }
 
-.home-spacer {
-  margin:20px;
+.spacer {
+  margin-top:10px;
 }
 
 .box-image-region {
@@ -91,6 +93,7 @@ body, html {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/school.png');
   /* Set a specific height */
   width: 100%;
+  min-height: 300px;
   /* Position and center the image to scale nicely on all screens */
   background-position: left;
   background-repeat: no-repeat;
@@ -100,7 +103,7 @@ body, html {
 }
 
 .buy-gift-box-region {
- height:500px;
+ min-height: 400px;
  width: 100%;
  background: #009DDC;
  border: solid thin white;
@@ -127,32 +130,32 @@ body, html {
 @media (min-width: 244px) {  
   .banner {font-size:2.5rem;} /*1rem = 16px*/
   .yellow {font-size:1.2rem;} /*1rem = 16px*/
-  .box-image-region {height:45vh;}
-  .buy-gift-box-region  {height:45vh;} 
+  .box-image-region {height:auto;}
+  .buy-gift-box-region  {height:100%;} 
 }
  
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
   .banner {font-size:3rem;} /*1rem = 16px*/
   .yellow {font-size:1.5rem;}   
-  .box-image-region {height:45vh;}
-  .buy-gift-box-region  {height:45vh;} 
+  .box-image-region {height:auto;}
+  .buy-gift-box-region  {height:100%;} 
 }
  
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
   .banner {font-size:4rem;} /*1rem = 16px*/
   .yellow {font-size:2rem;}
-  .box-image-region {height:45hvh;}
-  .buy-gift-box-region  {height:45vh;} 
+  .box-image-region {height:auto;}
+  .buy-gift-box-region  {height:100%;} 
 }
  
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {  
   .banner {font-size:5rem;} /*1rem = 16px*/ 
   .yellow {font-size:2.5rem;}
-  .box-image-region {height:50vh;}
-  .buy-gift-box-region  {height:50vh;}    
+  .box-image-region {height:auto;}
+  .buy-gift-box-region  {height:100%;}    
 }
 
 </style>
