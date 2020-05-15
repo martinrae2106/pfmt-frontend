@@ -1,39 +1,43 @@
+
 <template>
-
     <form action="http://pfmtlaravel.test/api/checkout" method="POST" id="payment-form" @submit.prevent="pay()">
-     <br>
-
-      <div class="input-group mb-2" style="max-width: 150px; min-width:150px;">
-        
-        <div class="input-group-prepend">
-        <span class="input-group-text" style="background-color:#009ddc">€</span>
-        </div>
-        <input type="number" class="form-control" aria-label="Amount in Euros" v-model="amount" id="amount" name="amount">
-        </div>
-
-    <hr>
-
-
-     <div class="form-group">
-          <label for="amount">Donation Amount</label>
-          <input type="number" class="form-control" id="amount" name="amount" v-model="amount">
+      
+    <div class="form-group">
+      <div class="input-group mb-2" style="width: 200px;">
+           <div class="input-group-prepend">
+                <span class="input-group-text" style="background-color:#009ddc">€</span>
+            </div>
+          <b-form-input :state="validationamount" type="text" class="form-control" id="amount" name="amount" v-model="amount" @keypress="isNumber($event)"></b-form-input>
+           <b-form-invalid-feedback :state="validationamount">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationamount">
+            </b-form-valid-feedback>    
       </div>
-
-      <div class="form-group">
-          <label for="card-element">Card Details</label>
-          <card-element></card-element>
-      </div>
+    </div>
+          
+ 
       <div class="row">
       <div class="col-md-6">
       <div class="form-group">
           <label for="name_on_card">Name on Card</label>
-          <input type="text" class="form-control" id="name_on_card" name="name_on_card" v-model="name_on_card">
+          <b-form-input :state="validationname" required  oninvalid="this.setCustomValidity('Add name on card')" oninput="setCustomValidity('')"
+          type="text" class="form-control" id="name_on_card" name="name_on_card" v-model="name_on_card"></b-form-input>
+             <b-form-invalid-feedback :state="validationname">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationname">
+            </b-form-valid-feedback>    
       </div>
       </div>
+
       <div class="col-md-6">
        <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" class="form-control" id="email" name="email" v-model="email">
+          <b-form-input :state="validationemail" required oninvalid="this.setCustomValidity('Add valid email address')" oninput="setCustomValidity('')" 
+          type="email" class="form-control" id="email" name="email" v-model="email"></b-form-input>
+           <b-form-invalid-feedback :state="validationemail">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationemail">
+            </b-form-valid-feedback>
       </div>
       </div>
       </div>
@@ -42,64 +46,118 @@
           <div class="col-md-6">
               <div class="form-group">
                   <label for="address">Address</label>
-                  <input type="text" class="form-control" id="address" name="address">
+                  <b-form-input :state="validationaddress" required oninvalid="this.setCustomValidity('Add first line of your address')" oninput="setCustomValidity('')"
+                  type="text" class="form-control" id="address" name="address" v-model="address"></b-form-input>
+           <b-form-invalid-feedback :state="validationaddress">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationaddress">
+            </b-form-valid-feedback>
               </div>
           </div>
 
           <div class="col-md-3">
               <div class="form-group">
                   <label for="city">City / Town</label>
-                  <input type="text" class="form-control" id="city" name="city">
+                  <b-form-input :state="validationcity" required oninvalid="this.setCustomValidity('Add your town or city')" oninput="setCustomValidity('')"
+                  type="text" class="form-control" id="city" name="city" v-model="city"></b-form-input>
+           <b-form-invalid-feedback :state="validationcity">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationcity">
+            </b-form-valid-feedback>
               </div>
           </div>
-
-      </div>
-
-      <div class="row">
-          <div class="col-md-4">
+          </div>
+    
+         <div class="row">
+          <div class="col-md-6">
               <div class="form-group">
-                  <label for="postalcode">Postal Code</label>
-                  <input type="text" class="form-control" id="postalcode" name="postalcode">
+                  <label for="postalcode">Eire Code</label>
+                 <b-form-input :state="validationcode" required oninvalid="this.setCustomValidity('Add Eire Code')" oninput="setCustomValidity('')"
+                   type="text" class="form-control" id="postalcode" name="postalcode" v-model="postalcode"></b-form-input>
+           <b-form-invalid-feedback :state="validationcode">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationcode">
+            </b-form-valid-feedback>
               </div>
           </div>
+         
+  
+        
 
-          <div class="col-md-4">
+        <div class="col-md-6">
               <div class="form-group">
                   <label for="country">Country</label>
-                  <input type="text" class="form-control" id="country" name="country">
+                  <b-form-input :state="validationcountry" required oninvalid="this.setCustomValidity('Add your country')" oninput="setCustomValidity('')"
+                   type="text" class="form-control" id="country" name="country" v-model="country"></b-form-input>
+           <b-form-invalid-feedback :state="validationcountry">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationcountry">
+            </b-form-valid-feedback>
               </div>
           </div>
+        </div>
 
+     
+      <div class="form-group">
+          <label for="card-element">Credit Card</label>
+          <card-element></card-element>
       </div>
-
-  
 
       <!-- CSRF Field -->
       <input type="hidden" name="_token" :value="csrf">
 
-     
-
-      <button type="submit" class="btn btn-info btn-donation">Make Donation</button>
+      <div class="spacer"></div>
+      <br>
+      <button type="submit" class="btn btn-info btn-donation">Submit Payment</button>
   </form>
-
 </template>
 
 <script>
     import { createToken, Card } from 'vue-stripe-elements-plus'
     export default {
-        name: 'payment-form',
         data () {
             return {
               csrf: document.head.querySelector('meta[name="csrf-token"]').content,
               name_on_card: '',
               amount: '',
               email: '',
+              address: '',
+              city: '',
+              postalcode: '',
+              country: '',
             }
         },
         created() {
             this.amount = this.$store.getters.donationAmount
-            console.log('Donation amount is ' + this.donationAmount)
+            console.log('Donation amount is ' + this.amount)
+        },
+        computed: {
+            validationemail() {
+                return this.email.length > 4
+            },
+            validationamount() {
+                return this.amount.length > 0 && this.amount != 0
+            },
+            validationname() {
+                return this.name_on_card.length > 1
+            },
+             validationaddress() {
+                return this.address.length > 1
+            },
+             validationcity() {
+                return this.city.length > 1
+            }, 
+            validationcode() {
+                return this.postalcode.length > 1
+            },
+            validationcountry() {
+                return this.country.length > 1
+            },
 
+
+       
+            
+        
         },
         methods: {
             pay () {
@@ -112,7 +170,7 @@
                 name: this.name_on_card,
               }
               createToken(options).then(result => {
-                // var form = document.getElementById('payment-form');
+                // var form = document.getElementById('payment-form');123654
                 var hiddenInput = document.createElement('input');
                 hiddenInput.setAttribute('type', 'hidden');
                 hiddenInput.setAttribute('name', 'stripeToken');
@@ -121,19 +179,27 @@
                 // Submit the form
                 this.$el.submit();
               })
-               this.$store.dispatch('updateDonation', amount)
-               this.$router.push({name: 'writemessage'})
-            }
+               //this.$router.push({name: 'writemessage'})
+
+            },
+            isNumber: function(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
+                }
       }
     }
 </script>
 
 <style>
-
 .form-group {
     color: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .spacer {
@@ -144,6 +210,5 @@
     margin-top: 20px;
     background-color: #009ddc;
 }
-
 
 </style>

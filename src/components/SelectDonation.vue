@@ -17,7 +17,7 @@
 
                             <div class="spacer"></div>
 
-                            <h7 class="heading-donation">Your kind donation of €{{ donationAmount }} will feed a child for: 
+                            <h6 class="heading-donation">Your kind donation of €{{ donationAmount }} will feed a child for: 
                               <span v-if="years > 0">
                                 <span v-if="years > 1">    
                                      {{ years }} school years
@@ -60,7 +60,7 @@
                                 </span>  
                               </span> 
 
-                            </h7>
+                            </h6>
                             <div class="spacer"></div>
         </div>
 
