@@ -1,7 +1,13 @@
 
 <template>
+
+    
+
+
     <form action="http://pfmtlaravel.test/api/checkout" method="POST" id="payment-form" @submit.prevent="pay()">
-      
+
+    
+
     <div class="form-group">
       <div class="input-group mb-2" style="width: 200px;">
            <div class="input-group-prepend">
@@ -108,7 +114,14 @@
 
       <div class="spacer"></div>
       <br>
-      <button type="submit" class="btn btn-info btn-donation">Submit Payment</button>
+      
+   <!--div v-if="serverError" class="server-error">{{ serverError }}</div>
+    <div v-if="successMessage" class="success-message">{{ successMessage }}</div-->
+
+      <b-button type="submit" variant="info lg" :disabled="loading">
+         <b-spinner small type="grow" v-if="loading"></b-spinner>
+            Make Donation
+       </b-button> 
   </form>
 </template>
 
@@ -125,6 +138,9 @@
               city: '',
               postalcode: '',
               country: '',
+              serverError: '',
+              successMessage: '',
+              loading: false,
             }
         },
         created() {
@@ -161,6 +177,7 @@
         },
         methods: {
             pay () {
+              this.loading = true  
               // createToken returns a Promise which resolves in a result object with
               // either a token or an error key.
               // See https://stripe.com/docs/api#tokens for the token object.
@@ -169,24 +186,27 @@
               var options = {
                 name: this.name_on_card,
               }
-              createToken(options).then(result => {
-                // var form = document.getElementById('payment-form');123654
+                createToken(options).then(result => {
+                //var form = document.getElementById('payment-form');
                 var hiddenInput = document.createElement('input');
                 hiddenInput.setAttribute('type', 'hidden');
                 hiddenInput.setAttribute('name', 'stripeToken');
                 hiddenInput.setAttribute('value', result.token.id);
                 this.$el.appendChild(hiddenInput);
                 // Submit the form
-                this.$el.submit();
+                this.$el.submit()
+                
+                //this.successMessage = 'Your donation was processed successfully!'
+                
               })
-               //this.$router.push({name: 'writemessage'})
-
+             
+              //this.$router.push({name: 'writemessage'})
             },
             isNumber: function(evt) {
                     evt = (evt) ? evt : window.event;
                     var charCode = (evt.which) ? evt.which : evt.keyCode;
                     if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-                        evt.preventDefault();;
+                        evt.preventDefault();   
                     } else {
                         return true;
                     }
@@ -209,6 +229,24 @@
 .btn-donation {
     margin-top: 20px;
     background-color: #009ddc;
+}
+
+.server-error {
+    margin-bottom: 12px;
+    font-size: 16px;
+    padding: 10px 16px;
+    color: #a94442;
+    background: #F3DEDE;
+    border-radius: 4px;
+}
+
+.success-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+    margin-bottom: 12px;
+    font-size: 16px;
+    padding: 10px 16px;
+    border-radius: 4px;
 }
 
 </style>

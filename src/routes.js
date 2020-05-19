@@ -18,7 +18,6 @@ import Home from './components/Home.vue';
 import SelectRegion from './components/SelectRegion.vue';
 import SelectSchool from './components/SelectSchool.vue';
 import SelectDonation from './components/SelectDonation.vue';
-//import PaymentForm from './components/PaymentForm.vue';
 import MakeDonation from './components/MakeDonation.vue';
 import WriteMessage from './components/WriteMessage.vue';
 import ThankYou from './components/ThankYou.vue';

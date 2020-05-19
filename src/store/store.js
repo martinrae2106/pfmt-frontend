@@ -28,6 +28,9 @@ export const store = new Vuex.Store({
         },
         donationAmount(state){
            return state.donationAmount
+        },
+        teacherName(state){
+          return state.teacherName
         }
     },
     mutations: {

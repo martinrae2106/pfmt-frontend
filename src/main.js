@@ -16,6 +16,7 @@ Vue.component('card-element', require('./components/CardElement.vue').default);
 Vue.component('payment-form', require('./components/PaymentForm.vue').default);
 Vue.component('pagefooter', require('./components/pageFooter.vue').default);
 
+
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin

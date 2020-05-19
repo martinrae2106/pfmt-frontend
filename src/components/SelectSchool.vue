@@ -16,7 +16,10 @@
                         text-field="name" placeholder="School" oninvalid="this.setCustomValidity('Select your school')"
                         oninput="setCustomValidity('')"></b-form-select>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Continue</button>
+                    <b-button type="submit" variant="warning lg" :disabled="loading">
+                          <b-spinner small type="grow" v-if="loading"></b-spinner>
+                          Continue
+                    </b-button>
                 </form>
             </div>
         </div>
@@ -38,6 +41,7 @@ export default {
       return {
         schools: [],
         selected: null,
+        loading: false,
       }
   }, 
   created() {
@@ -50,9 +54,16 @@ export default {
   },
   methods: {
             addSchool() {
+                  this.loading = true
                   this.$store.dispatch('addSchool', this.selected)
-                  console.log(this.selected)
-                   this.$router.push({name: 'selectdonation'})
+                  .then(response => {
+                    this.loading = false
+                    this.$router.push({name: 'selectdonation'})
+                  })
+                  .catch(error => {
+                    this.loading = false
+                    this.serverError = error.response.data
+                  })
             },
     },
 }

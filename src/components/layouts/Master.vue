@@ -20,7 +20,9 @@
           </div>
       </div>
     </div>
-        <router-view></router-view>
+        <transition name="router-animation" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+          <router-view></router-view>
+        </transition>
         <br>
         <pagefooter></pagefooter>
    </div>
@@ -136,18 +138,9 @@ export default {
     padding: 14px 12px;
     font-size: 18px;
     font-weight: bold;
-    background: #60BD4F;
     color: white;
     border-radius: 3px;
     cursor: pointer;
-
-    &:hover {
-      background: darken(#60BD4F, 10%);
-    }
-    &:disabled {
-      background: lighten(#60BD4F, 25%);
-      cursor: not-allowed;
-    }
   }
   .server-error {
     margin-bottom: 12px;
@@ -175,46 +168,45 @@ export default {
   .page-wrapper {
     animation-duration: 0.2s;
   }
-  // CSS Spinner
-  .lds-ring-container {
-    position: absolute;
-    right: 50%;
+
+.lds-ring-container {
+  align-content: center;
+  position: relative;
+}
+  
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 4px double #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
   }
-  .lds-ring {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
+  100% {
+    transform: rotate(360deg);
   }
-  .lds-ring div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    // margin: 6px;
-    border: 3px solid #fff;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
-  }
-  .lds-ring div:nth-child(1) {
-    animation-delay: -0.45s;
-  }
-  .lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-  }
-  .lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-  }
-  @keyframes lds-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+}
+
+
+
+
+
   /* Small devices (landscape phones, 544px and up) */
   @media (min-width: 10px) {  
     .logo-element {font-size:1.0rem;} /*1rem = 16px*/

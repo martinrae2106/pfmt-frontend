@@ -62,8 +62,10 @@
                       </b-form-valid-feedback>
 
                       </b-form-group>
-                    
-                     <b-button type="submit" variant="warning">Continue</b-button>
+                        <b-button type="submit" variant="warning" :disabled="loading">
+                          <b-spinner small type="grow" v-if="loading"></b-spinner>
+                          Continue
+                        </b-button>              
                   </b-form>
                   </div>
   </div>
@@ -78,7 +80,9 @@ export default {
   name: 'Home',
   data() {
       return {
-        teacherName: ''
+        teacherName: '',
+        loading: false,
+        serverError: '',
       }
   }, 
   computed: {
@@ -88,8 +92,16 @@ export default {
   },
   methods: {
             addTeacher() {
+                  this.loading = true
                   this.$store.dispatch('addTeacher', this.teacherName)
-                  this.$router.push({name: 'selectregion'})
+                  .then(response => {
+                    this.loading = false
+                    this.$router.push({name: 'selectregion'})
+                  })
+                  .catch(error => {
+                    this.loading = false
+                    this.serverError = error.response.data
+                  })
             }
   }
 }
@@ -181,6 +193,7 @@ body, html {
 
 .btn {
   font-family: 'Staatliches', sans-serif;
+  align-content: center;
 }
 
 .gift-text {
@@ -188,10 +201,6 @@ body, html {
   margin-left: 2vh;
   margin-right: 2vh;
   color: white;
-}
-
-.btn-primary {
-     font-family: 'Staatliches', sans-serif;
 }
 
 /* Small devices (landscape phones, 544px and up) */

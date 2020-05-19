@@ -1,6 +1,6 @@
 <template>
 <div class="col-md-12">
-<div class="row spacer">
+<div class="row spacer"> 
   <div class="col-md-6 box-image-region">
   </div>
   <div class="col-md-6 buy-gift-box-region">
@@ -15,7 +15,10 @@
                         oninvalid="this.setCustomValidity('Select your region')"
                         oninput="setCustomValidity('')" placeholder="region"></b-form-select>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Continue</button>
+                      <b-button type="submit" variant="warning" :disabled="loading">
+                          <b-spinner small type="grow" v-if="loading"></b-spinner>
+                          Continue
+                      </b-button>
                 </form>
             </div>
         </div>
@@ -38,6 +41,7 @@ export default {
         teacherName: '',
         regions: [],
         selected: null,
+        loading: false,
       }
   }, 
   created() {
@@ -49,10 +53,16 @@ export default {
   },
   methods: {
             addRegion() {
+                  this.loading = true
                   this.$store.dispatch('addRegion', this.selected)
-                  //this.$router.push({name: 'login'})
-                  console.log(this.selected);
-                  this.$router.push({name: 'selectschool'})
+                  .then(response => {
+                    this.loading = false
+                    this.$router.push({name: 'selectschool'})
+                  })
+                  .catch(error => {
+                    this.loading = false
+                    this.serverError = error.response.data
+                  })
             },
     },
 }
@@ -112,6 +122,7 @@ body, html {
 .btn {
   font-family: 'Staatliches', sans-serif;
 }
+
 
 .gift-text-region {
   margin-top:6vh;

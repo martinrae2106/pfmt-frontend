@@ -82,8 +82,11 @@
 
 
                                      </div>
-                               </div>
-                                      <button type="submit" class="btn btn-warning btn-lg">Continue</button>
+                               </div> 
+                               <b-button type="submit" variant="warning lg" :disabled="loading">
+                                <b-spinner small type="grow" v-if="loading"></b-spinner>
+                                  Continue
+                               </b-button> 
                               </form>
         </div>
          <!-- string value -->
@@ -101,6 +104,7 @@ export default {
   data() {
       return {
         donationAmount: 0,
+        loading: false,
       }
   }, 
   computed: {
@@ -164,10 +168,17 @@ export default {
                   //this.$router.push({name: 'makedonation'})
             },
             updateDonationSubmit(amount) {
+                  this.loading = true
                   this.$store.dispatch('updateDonation', amount)
-                  
-                  this.donationAmount = this.$store.getters.donationAmount
-                  this.$router.push({name: 'makedonation'})
+                  .then(response => {
+                    this.donationAmount = this.$store.getters.donationAmount
+                    this.loading = false
+                    this.$router.push({name: 'makedonation'})
+                  })
+                  .catch(error => {
+                    this.loading = false
+                    this.serverError = error.response.data
+                  })
             },
     },
 
