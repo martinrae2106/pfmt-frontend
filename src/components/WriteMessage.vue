@@ -6,7 +6,7 @@
   <div class="col-md-6 buy-gift-box-message">
     
     <div class="gift-text-message">
-        <h1 class="heading-message">Add Your Message:</h1>    
+        <h1 class="heading-message">Add To Your Message:</h1>    
             <div class="row">
             <div class="col-md-12 chalk" style="font-size: 17px;">
                        <div class="paper">
@@ -14,11 +14,11 @@
                         
                        <p>Thank you for being an amazing teacher and making this a special year.</p>
 
-                       <p>As a gift for your inspirational work, I have made a donation to Mary's Meals in your name! This will provide
+                       <p>As a gift for your inspirational work, I have made a donation <span v-if="includeDonationAmount === 'accepted'"> of ${{ donationAmount }} </span> to Mary's Meals in your name! This will provide
                           children with school meals and spread hope in classrooms around the world.
                        </p>
 
-                        <p>{{ text }}</p>
+                        <p>{{ text }}</p>                       
                        
 
                         <p>Kind regards,</p>
@@ -39,11 +39,21 @@
                             ></b-form-textarea>
                         </div>
 
-                            <b-form-input id="pupilName" v-model="pupilName" placeholder="Enter your name (Optional)"></b-form-input>
+                        <b-form-input id="pupilName" v-model="pupilName" placeholder="Enter your name (Optional)"></b-form-input>
                         
-
-                       
                         
+                         
+                        <h3 class="heading-message" style="margin-top:30px">Include donation amount:</h3>    
+                          <div class="form-group" style="margin-top:10px; margin-bottom:40px;">
+                              <b-form-checkbox size="lg"
+                              id="checkbox-1"
+                              v-model="includeDonationAmount"
+                              name="checkbox-1"
+                              value="accepted"
+                              unchecked-value="not_accepted" class="">
+                              I would like to include my donation amount in my thank you message.
+                              </b-form-checkbox>
+                        </div>   
                     <button type="submit" class="btn btn-warning btn-lg">Continue</button>
                 </form>
             </div>
@@ -65,16 +75,20 @@ export default {
       return {
         pupilName: '',
         text: '',
-        teacherName: 'Teacher'
+        teacherName: 'Teacher',
+        donationAmount: '',
+        includeDonationAmount: 'not_accepted',
       }
   }, 
   created() {
             this.teacherName = this.$store.getters.teacherName
+            this.donationAmount = this.$store.getters.donationAmount
   },
   methods: {
             addMessage() {
                   this.$store.dispatch('addMessage', this.text)
                   this.$store.dispatch('addPupilName', this.pupilName)
+                  this.$store.dispatch('addIncludeDonationAmount', this.includeDonationAmount)
                   this.$router.push({name: 'thankyou'})
             },
     },

@@ -14,6 +14,7 @@ export const store = new Vuex.Store({
         region: '',
         message: '',
         donationAmount: '18.30',
+        includeDonationAmount: '',
         //regions: [],
     }, 
     getters: {
@@ -63,7 +64,11 @@ export const store = new Vuex.Store({
      addPupilName(state, pupilName){
        state.pupilName = pupilName
        console.log("the pupil's name is " +state.pupilName)
-     }
+     },
+     addIncludeDonationAmount(state, includeDonationAmount){
+      state.includeDonationAmount = includeDonationAmount
+      console.log("includeDonationAmount is  " +state.includeDonationAmount)
+    }
     },
     actions: {
         register(context, data) {
@@ -148,6 +153,10 @@ export const store = new Vuex.Store({
         addPupilName(context, pupilName)
         {
               context.commit('addPupilName', pupilName)
+        },
+        addIncludeDonationAmount(context, includeDonationAmount)
+        {
+              context.commit('addIncludeDonationAmount', includeDonationAmount)
         },
         
     },    

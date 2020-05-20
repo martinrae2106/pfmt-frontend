@@ -21,8 +21,27 @@
       </div>
     </div>
           
- 
       <div class="row">
+        
+        <div class="col-md-12">     
+        <div class="form-group" style="margin-top:30px; margin-bottom:20px;">
+            <b-form-checkbox size="lg" oninvalid="this.setCustomValidity('Please check this box')" oninput="setCustomValidity('')"
+            required
+            id="checkbox-1"
+            v-model="cardholder"
+            name="checkbox-1"
+            value="accepted"
+            unchecked-value="not_accepted" class=""
+            :state="validationcardholder">
+            I confirm that I am the card holder and am 13 years or older
+            </b-form-checkbox>
+             <b-form-invalid-feedback :state="validationcardholder">
+            </b-form-invalid-feedback>
+            <b-form-valid-feedback :state="validationcardholder">
+            </b-form-valid-feedback>
+        </div>   
+        </div>
+
       <div class="col-md-6">
       <div class="form-group">
           <label for="name_on_card">Name on Card</label>
@@ -102,12 +121,28 @@
               </div>
           </div>
         </div>
-
      
       <div class="form-group">
-          <label for="card-element">Credit Card</label>
+          <label for="card-element">Card Details</label>
           <card-element></card-element>
       </div>
+
+       <div class="col-md-12"> 
+           <h3 class="keep-in-touch">Keep In Touch:</h3>    
+        <div class="form-group" style="margin-top:10px; margin-bottom:20px;">
+            <b-form-checkbox size="lg"
+            id="checkbox-2"
+            v-model="emailconsent"
+            name="checkbox-2"
+            value="accepted"
+            unchecked-value="not_accepted" class="">
+            I would like to hear the latest news via email about Present For My Teacher, including fundraising progress and future campaigns.
+            </b-form-checkbox>
+        </div>   
+        </div>  
+
+    
+
 
       <!-- CSRF Field -->
       <input type="hidden" name="_token" :value="csrf">
@@ -137,6 +172,7 @@
               address: '',
               city: '',
               postalcode: '',
+              cardholder: 'not_accepted',
               country: '',
               serverError: '',
               successMessage: '',
@@ -168,6 +204,9 @@
             },
             validationcountry() {
                 return this.country.length > 1
+            },
+            validationcardholder() {
+                return this.cardholder == 'accepted'
             },
 
 
@@ -248,5 +287,12 @@
     padding: 10px 16px;
     border-radius: 4px;
 }
+
+.keep-in-touch {
+    font-family: 'Staatliches', sans-serif;
+    color: white;
+    margin-top: 30px;
+}
+
 
 </style>

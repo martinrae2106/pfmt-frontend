@@ -9,6 +9,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueSocialSharing from 'vue-social-sharing'
 
 import 'vue-search-select/dist/VueSearchSelect.css'
 
@@ -16,15 +17,15 @@ Vue.component('card-element', require('./components/CardElement.vue').default);
 Vue.component('payment-form', require('./components/PaymentForm.vue').default);
 Vue.component('pagefooter', require('./components/pageFooter.vue').default);
 
-
+Vue.use(VueRouter)
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+Vue.use(VueSocialSharing);
 
 Vue.config.productionTip = false
 
-Vue.use(VueRouter)
 
 //let token = document.head.querySelector('meta[name="csrf-token"]');
 
